@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Color Picker -->
-    <string name="press_color_to_apply">Press on Color to apply</string>
+    <string name="press_color_to_apply">Press on color to apply</string>
+    <string name="extract_from_photo">Extract colors from photo</string>
+    <string name="camera_not_found">No camera app found</string>
 </resources>

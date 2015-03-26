@@ -35,6 +35,18 @@
         android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/fromphoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_camera"
+            android:gravity="center_vertical"
+            android:drawablePadding="5dp"
+            android:text="@string/extract_from_photo"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
         <EditText
             android:id="@+id/hex_val"
             android:layout_width="fill_parent"
@@ -44,7 +56,7 @@
             android:maxLength="7"
             android:singleLine="true"
             android:inputType="textCapCharacters"
-            android:visibility="gone"></EditText>
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="wrap_content"

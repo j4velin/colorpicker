@@ -22,6 +22,18 @@
               android:paddingLeft="5dp"
               android:paddingRight="5dp">
 
+    <Button
+        android:id="@+id/fromphoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_camera"
+        android:gravity="center_vertical"
+        android:drawablePadding="5dp"
+        android:text="@string/extract_from_photo"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
     <net.margaritov.preference.colorpicker.ColorPickerView
         android:id="@+id/color_picker_view"
         android:layout_width="wrap_content"
@@ -54,7 +66,7 @@
             android:maxLength="7"
             android:singleLine="true"
             android:inputType="textCapCharacters"
-            android:visibility="gone"></EditText>
+            android:visibility="gone"/>
     </LinearLayout>
 
     <LinearLayout

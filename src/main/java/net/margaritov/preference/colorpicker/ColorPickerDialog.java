@@ -18,6 +18,8 @@ package net.margaritov.preference.colorpicker;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
@@ -39,6 +41,7 @@ import java.util.Locale;
 public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColorChangedListener,
         View.OnClickListener {
 
+    private final Context context;
     private ColorPickerView mColorPicker;
 
     private ColorPickerPanelView mOldColor;
@@ -48,7 +51,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
     private boolean mHexValueEnabled = false;
     private ColorStateList mHexDefaultTextColor;
 
-    private OnColorChangedListener mListener;
+    public static OnColorChangedListener mListener;
 
     public interface OnColorChangedListener {
         public void onColorChanged(int color);
@@ -56,7 +59,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
 
     public ColorPickerDialog(Context context, int initialColor) {
         super(context);
-
+        this.context = context;
         init(initialColor);
     }
 
@@ -96,7 +99,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
                     String s = mHexVal.getText().toString();
                     if (s.length() > 5 || s.length() < 10) {
                         try {
-                            int c = ColorPickerPreference.convertToColorInt(s.toString());
+                            int c = Util.convertToColorInt(s.toString());
                             mColorPicker.setColor(c, true);
                             mHexVal.setTextColor(mHexDefaultTextColor);
                         } catch (IllegalArgumentException e) {
@@ -120,6 +123,12 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
         mColorPicker.setOnColorChangedListener(this);
         mOldColor.setColor(color);
         mColorPicker.setColor(color, true);
+
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            layout.findViewById(R.id.fromphoto).setOnClickListener(this);
+        } else {
+            layout.findViewById(R.id.fromphoto).setVisibility(View.GONE);
+        }
 
     }
 
@@ -159,11 +168,9 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
 
     private void updateHexValue(int color) {
         if (getAlphaSliderVisible()) {
-            mHexVal.setText(
-                    ColorPickerPreference.convertToARGB(color).toUpperCase(Locale.getDefault()));
+            mHexVal.setText(Util.convertToARGB(color).toUpperCase(Locale.getDefault()));
         } else {
-            mHexVal.setText(
-                    ColorPickerPreference.convertToRGB(color).toUpperCase(Locale.getDefault()));
+            mHexVal.setText(Util.convertToRGB(color).toUpperCase(Locale.getDefault()));
         }
         mHexVal.setTextColor(mHexDefaultTextColor);
     }
@@ -200,6 +207,8 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
             if (mListener != null) {
                 mListener.onColorChanged(mNewColor.getColor());
             }
+        } else if (v.getId() == R.id.fromphoto) {
+            context.startActivity(new Intent(context, ExtractFromPhoto.class));
         }
         dismiss();
     }

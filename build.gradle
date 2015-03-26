@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        minSdkVersion 5
+        minSdkVersion 7
         targetSdkVersion 21
     }
 
@@ -19,5 +19,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.android.support:palette-v7:+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
