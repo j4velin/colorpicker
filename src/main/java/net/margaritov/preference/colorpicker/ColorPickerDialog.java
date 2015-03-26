@@ -27,6 +27,7 @@ import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -62,7 +63,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
     private void init(int color) {
         // To fight color banding.
         getWindow().setFormat(PixelFormat.RGBA_8888);
-
+        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setUp(color);
 
     }
@@ -75,8 +76,6 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
         View layout = inflater.inflate(R.layout.dialog_color_picker, null);
 
         setContentView(layout);
-
-        setTitle(R.string.dialog_color_picker);
 
         mColorPicker = (ColorPickerView) layout.findViewById(R.id.color_picker_view);
         mOldColor = (ColorPickerPanelView) layout.findViewById(R.id.old_color_panel);
