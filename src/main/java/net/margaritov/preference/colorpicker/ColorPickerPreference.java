@@ -35,12 +35,8 @@ import android.widget.LinearLayout;
  *
  * @author Sergey Margaritov
  */
-public class ColorPickerPreference
-        extends
-        Preference
-        implements
-        Preference.OnPreferenceClickListener,
-        ColorPickerDialog.OnColorChangedListener {
+public class ColorPickerPreference extends Preference implements
+        Preference.OnPreferenceClickListener, ColorPickerDialog.OnColorChangedListener {
 
     View mView;
     ColorPickerDialog mDialog;
@@ -93,15 +89,13 @@ public class ColorPickerPreference
     private void setPreviewColor() {
         if (mView == null) return;
         ImageView iView = new ImageView(getContext());
-        LinearLayout widgetFrameView = ((LinearLayout) mView.findViewById(android.R.id.widget_frame));
+        LinearLayout widgetFrameView =
+                ((LinearLayout) mView.findViewById(android.R.id.widget_frame));
         if (widgetFrameView == null) return;
         widgetFrameView.setVisibility(View.VISIBLE);
-        widgetFrameView.setPadding(
-                widgetFrameView.getPaddingLeft(),
-                widgetFrameView.getPaddingTop(),
-                (int) (mDensity * 8),
-                widgetFrameView.getPaddingBottom()
-        );
+        widgetFrameView
+                .setPadding(widgetFrameView.getPaddingLeft(), widgetFrameView.getPaddingTop(),
+                        (int) (mDensity * 8), widgetFrameView.getPaddingBottom());
         // remove already create preview image
         int count = widgetFrameView.getChildCount();
         if (count > 0) {
