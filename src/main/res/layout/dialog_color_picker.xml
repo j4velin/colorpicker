@@ -45,6 +45,7 @@
         android:id="@+id/text_hex_wrapper"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp">
@@ -65,8 +66,21 @@
             android:imeOptions="actionDone"
             android:maxLength="7"
             android:singleLine="true"
-            android:inputType="textCapCharacters"
-            android:visibility="gone"/>
+            android:inputType="textCapCharacters"/>
+
+        <ImageView
+            android:id="@+id/copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/imageclick"
+            android:src="@drawable/ic_copy"/>
+
+        <ImageView
+            android:id="@+id/paste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/imageclick"
+            android:src="@drawable/ic_paste"/>
     </LinearLayout>
 
     <LinearLayout

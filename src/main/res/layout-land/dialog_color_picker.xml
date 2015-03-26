@@ -47,16 +47,38 @@
             android:layout_marginBottom="5dp"
             android:textAppearance="?android:attr/textAppearanceSmall"/>
 
-        <EditText
-            android:id="@+id/hex_val"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="HEX"
-            android:imeOptions="actionDone"
-            android:maxLength="7"
-            android:singleLine="true"
-            android:inputType="textCapCharacters"
-            android:visibility="gone"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/hex_val"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="HEX"
+                android:imeOptions="actionDone"
+                android:maxLength="7"
+                android:singleLine="true"
+                android:inputType="textCapCharacters"/>
+
+            <ImageView
+                android:id="@+id/copy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/imageclick"
+                android:src="@drawable/ic_copy"/>
+
+            <ImageView
+                android:id="@+id/paste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/imageclick"
+                android:src="@drawable/ic_paste"/>
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"

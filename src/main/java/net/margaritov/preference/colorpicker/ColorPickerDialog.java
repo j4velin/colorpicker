@@ -23,6 +23,7 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -35,6 +36,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -48,7 +50,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
     private ColorPickerPanelView mNewColor;
 
     private EditText mHexVal;
-    private boolean mHexValueEnabled = false;
+    private boolean mHexValueEnabled = true;
     private ColorStateList mHexDefaultTextColor;
 
     public static OnColorChangedListener mListener;
@@ -99,7 +101,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
                     String s = mHexVal.getText().toString();
                     if (s.length() > 5 || s.length() < 10) {
                         try {
-                            int c = Util.convertToColorInt(s.toString());
+                            int c = Util.convertToColorInt(s);
                             mColorPicker.setColor(c, true);
                             mHexVal.setTextColor(mHexDefaultTextColor);
                         } catch (IllegalArgumentException e) {
@@ -130,6 +132,11 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
             layout.findViewById(R.id.fromphoto).setVisibility(View.GONE);
         }
 
+        if (Build.VERSION.SDK_INT >= 11) {
+            findViewById(R.id.copy).setOnClickListener(this);
+            findViewById(R.id.paste).setOnClickListener(this);
+        }
+
     }
 
     @Override
@@ -154,6 +161,10 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
             updateHexLengthFilter();
             updateHexValue(getColor());
         } else mHexVal.setVisibility(View.GONE);
+        findViewById(R.id.copy)
+                .setVisibility(enable & Build.VERSION.SDK_INT >= 11 ? View.VISIBLE : View.GONE);
+        findViewById(R.id.paste)
+                .setVisibility(enable & Build.VERSION.SDK_INT >= 11 ? View.VISIBLE : View.GONE);
     }
 
     public boolean getHexValueEnabled() {
@@ -191,7 +202,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
      * Set a OnColorChangedListener to get notified when the color
      * selected by the user has changed.
      *
-     * @param listener
+     * @param listener the listener
      */
     public void setOnColorChangedListener(OnColorChangedListener listener) {
         mListener = listener;
@@ -207,10 +218,25 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
             if (mListener != null) {
                 mListener.onColorChanged(mNewColor.getColor());
             }
+            dismiss();
         } else if (v.getId() == R.id.fromphoto) {
             context.startActivity(new Intent(context, ExtractFromPhoto.class));
+            dismiss();
+        } else if (v.getId() == R.id.copy) {
+            API11Wrapper.copy(context, mHexVal.getText().toString());
+            Toast.makeText(context, R.string.copied, Toast.LENGTH_SHORT).show();
+        } else if (v.getId() == R.id.paste) {
+            String s = API11Wrapper.paste(context);
+            if (s != null) {
+                try {
+                    int c = Util.convertToColorInt(s);
+                    mColorPicker.setColor(c, true);
+                    mHexVal.setTextColor(mHexDefaultTextColor);
+                } catch (IllegalArgumentException e) {
+                    mHexVal.setTextColor(Color.RED);
+                }
+            }
         }
-        dismiss();
     }
 
     @Override

@@ -4,4 +4,5 @@
     <string name="press_color_to_apply">Press on color to apply</string>
     <string name="extract_from_photo">Extract colors from photo</string>
     <string name="camera_not_found">No camera app found</string>
+    <string name="copied">Copied</string>
 </resources>
