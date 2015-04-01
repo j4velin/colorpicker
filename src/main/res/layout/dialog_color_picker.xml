@@ -30,8 +30,7 @@
         android:gravity="center_vertical"
         android:drawablePadding="5dp"
         android:text="@string/extract_from_photo"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_margin="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <net.margaritov.preference.colorpicker.ColorPickerView
