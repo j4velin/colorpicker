@@ -59,8 +59,8 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
         public void onColorChanged(int color);
     }
 
-    public ColorPickerDialog(Context context, int initialColor) {
-        super(context);
+    public ColorPickerDialog(final Context context, int initialColor) {
+        super(context, R.style.LibTheme_Dialog);
         this.context = context;
         init(initialColor);
     }
@@ -204,7 +204,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
      *
      * @param listener the listener
      */
-    public void setOnColorChangedListener(OnColorChangedListener listener) {
+    public void setOnColorChangedListener(final OnColorChangedListener listener) {
         mListener = listener;
     }
 
@@ -213,7 +213,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         if (v.getId() == R.id.new_color_panel) {
             if (mListener != null) {
                 mListener.onColorChanged(mNewColor.getColor());
@@ -248,7 +248,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
+    public void onRestoreInstanceState(final Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mOldColor.setColor(savedInstanceState.getInt("old_color"));
         mColorPicker.setColor(savedInstanceState.getInt("new_color"), true);

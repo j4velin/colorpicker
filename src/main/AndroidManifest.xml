@@ -7,7 +7,7 @@
     <application
         android:allowBackup="true">
         <activity
-            android:theme="@android:style/Theme.Dialog"
+            android:theme="@style/LibTheme.Dialog"
             android:name=".ExtractFromPhoto"/>
     </application>
 </manifest>

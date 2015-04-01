@@ -22,7 +22,7 @@ public class ExtractFromPhoto extends Activity {
     private List<Palette.Swatch> swatches;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -41,7 +41,7 @@ public class ExtractFromPhoto extends Activity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             if (resultCode == RESULT_OK) {
                 Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
@@ -58,7 +58,7 @@ public class ExtractFromPhoto extends Activity {
             View.OnClickListener {
 
         @Override
-        public ColorHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ColorHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
             View v = new View(ExtractFromPhoto.this);
             int size = (int) Util.dpToPx(ExtractFromPhoto.this, 50);
             v.setLayoutParams(new RecyclerView.LayoutParams(size, size));
@@ -68,7 +68,7 @@ public class ExtractFromPhoto extends Activity {
         }
 
         @Override
-        public void onBindViewHolder(ColorHolder holder, int position) {
+        public void onBindViewHolder(final ColorHolder holder, int position) {
             int color = swatches.get(position).getRgb();
             holder.v.setBackgroundColor(color);
             holder.v.setTag(color);
@@ -80,7 +80,7 @@ public class ExtractFromPhoto extends Activity {
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(final View v) {
             ColorPickerDialog.mListener.onColorChanged((int) v.getTag());
             finish();
         }
