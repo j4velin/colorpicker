@@ -76,7 +76,7 @@ public class ExtractFromPhoto extends Activity {
 
         @Override
         public int getItemCount() {
-            return swatches.size();
+            return swatches == null ? 0 : swatches.size();
         }
 
         @Override
