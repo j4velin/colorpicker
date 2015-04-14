@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.margaritov.preference.colorpicker;
+package de.j4velin.lib.colorpicker;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
