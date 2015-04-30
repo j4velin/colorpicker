@@ -33,7 +33,7 @@
         android:layout_margin="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-    <net.margaritov.preference.colorpicker.ColorPickerView
+    <de.j4velin.lib.colorpicker.ColorPickerView
         android:id="@+id/color_picker_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
         android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
-        <net.margaritov.preference.colorpicker.ColorPickerPanelView
+        <de.j4velin.lib.colorpicker.ColorPickerPanelView
             android:id="@+id/old_color_panel"
             android:layout_width="0px"
             android:layout_height="fill_parent"
@@ -103,7 +103,7 @@
             android:text="→"
             android:textSize="20sp"/>
 
-        <net.margaritov.preference.colorpicker.ColorPickerPanelView
+        <de.j4velin.lib.colorpicker.ColorPickerPanelView
             android:id="@+id/new_color_panel"
             android:layout_width="0px"
             android:layout_height="wrap_content"

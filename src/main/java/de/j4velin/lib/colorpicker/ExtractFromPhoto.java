@@ -32,7 +32,6 @@ import java.util.List;
 public class ExtractFromPhoto extends Activity {
 
     private final static int REQUEST_IMAGE_CAPTURE = 1;
-    private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private List<Palette.Swatch> swatches;
 
@@ -44,7 +43,7 @@ public class ExtractFromPhoto extends Activity {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             setTitle(R.string.press_color_to_apply);
             setContentView(R.layout.extract);
-            mRecyclerView = (RecyclerView) findViewById(R.id.grid);
+            RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.grid);
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
             mAdapter = new ColorsAdapter();
@@ -59,8 +58,9 @@ public class ExtractFromPhoto extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             if (resultCode == RESULT_OK) {
-                Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-                Palette p = Palette.generate(imageBitmap, 16);
+                Palette p =
+                        Palette.from((Bitmap) data.getExtras().get("data")).maximumColorCount(16)
+                                .generate();
                 swatches = p.getSwatches();
                 mAdapter.notifyDataSetChanged();
             } else {

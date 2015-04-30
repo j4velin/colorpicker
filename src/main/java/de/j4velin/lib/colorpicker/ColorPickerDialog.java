@@ -56,7 +56,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
     public static OnColorChangedListener mListener;
 
     public interface OnColorChangedListener {
-        public void onColorChanged(int color);
+        void onColorChanged(int color);
     }
 
     public ColorPickerDialog(final Context context, int initialColor) {
@@ -70,7 +70,6 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
         getWindow().setFormat(PixelFormat.RGBA_8888);
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setUp(color);
-
     }
 
     private void setUp(int color) {
