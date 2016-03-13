@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="de.j4velin.lib.colorpicker">
+<manifest package="de.j4velin.lib.colorpicker"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:allowBackup="true">
+        android:allowBackup="true"
+        android:hardwareAccelerated="false">
         <activity
-            android:theme="@style/LibTheme.Dialog"
-            android:name=".ExtractFromPhoto"/>
+            android:name=".ExtractFromPhoto"
+            android:theme="@style/LibTheme.Dialog"/>
     </application>
 </manifest>
