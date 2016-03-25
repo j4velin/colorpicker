@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: "com.jfrog.bintray"
 
-version = "1.2.1"
+version = "1.2.3"
 
 android {
 
@@ -18,7 +18,7 @@ android {
     defaultConfig {
         minSdkVersion 7
         targetSdkVersion 21
-        versionCode 121
+        versionCode 123
         versionName version
     }
 
@@ -84,6 +84,7 @@ task sourcesJar(type: Jar) {
 }
 
 task javadoc(type: Javadoc) {
+    failOnError false
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
