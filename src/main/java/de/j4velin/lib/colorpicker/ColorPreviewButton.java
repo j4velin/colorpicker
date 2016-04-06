@@ -1,28 +1,36 @@
 package de.j4velin.lib.colorpicker;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-@SuppressWarnings("unused")
 public class ColorPreviewButton extends View {
 
     private Paint paint = new Paint();
     private int color;
+    private final int borderColor;
 
     public ColorPreviewButton(final Context context) {
-        super(context);
+        this(context, null);
     }
 
     public ColorPreviewButton(final Context context, final AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public ColorPreviewButton(final Context context, final AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        TypedArray a = context.getTheme()
+                .obtainStyledAttributes(attrs, R.styleable.ColorPreviewButton, 0, 0);
+        try {
+            borderColor = a.getColor(R.styleable.ColorPreviewButton_borderColor, Color.WHITE);
+        } finally {
+            a.recycle();
+        }
     }
 
     public void setColor(final int c) {
@@ -40,7 +48,7 @@ public class ColorPreviewButton extends View {
         paint.setColor(color);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawCircle(getWidth() / 2, getHeight() / 2, getHeight() / 2, paint);
-        paint.setColor(Color.WHITE);
+        paint.setColor(borderColor);
         paint.setStyle(Paint.Style.STROKE);
         int borderwidth = (int) Util.dpToPx(getContext(), 1f);
         paint.setStrokeWidth(borderwidth);
