@@ -31,9 +31,12 @@ public abstract class API11Wrapper {
 
     public static String paste(final Context c) {
         String re = null;
-        ClipboardManager cm = (ClipboardManager) c.getSystemService(Context.CLIPBOARD_SERVICE);
-        if (cm.hasPrimaryClip() && cm.getPrimaryClip().getItemCount() > 0) {
-            re = cm.getPrimaryClip().getItemAt(0).getText().toString();
+        try {
+            ClipboardManager cm = (ClipboardManager) c.getSystemService(Context.CLIPBOARD_SERVICE);
+            if (cm.hasPrimaryClip() && cm.getPrimaryClip().getItemCount() > 0) {
+                re = cm.getPrimaryClip().getItemAt(0).getText().toString();
+            }
+        } catch (Exception e) {
         }
         return re;
     }
