@@ -28,6 +28,7 @@ public class ColorPreviewButton extends View {
                 .obtainStyledAttributes(attrs, R.styleable.ColorPreviewButton, 0, 0);
         try {
             borderColor = a.getColor(R.styleable.ColorPreviewButton_borderColor, Color.WHITE);
+            color = a.getColor(R.styleable.ColorPreviewButton_initColor, Color.BLACK);
         } finally {
             a.recycle();
         }

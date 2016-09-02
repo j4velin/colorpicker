@@ -1,5 +1,6 @@
 <resources>
     <declare-styleable name="ColorPreviewButton">
         <attr name="borderColor" format="color"/>
+        <attr name="initColor" format="color"/>
     </declare-styleable>
 </resources>
