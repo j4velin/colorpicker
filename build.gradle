@@ -46,6 +46,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
     }
+
+    lintOptions {
+        disable 'MissingTranslation'
+    }
 }
 
 dependencies {
@@ -120,7 +124,7 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 
 // https://github.com/bintray/gradle-bintray-plugin
 bintray {
-    dryRun = false
+    dryRun = true
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
 
