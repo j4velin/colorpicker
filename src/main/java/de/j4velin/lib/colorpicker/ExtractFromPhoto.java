@@ -58,11 +58,15 @@ public class ExtractFromPhoto extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             if (resultCode == RESULT_OK) {
-                Palette p =
-                        Palette.from((Bitmap) data.getExtras().get("data")).maximumColorCount(16)
-                                .generate();
-                swatches = p.getSwatches();
-                mAdapter.notifyDataSetChanged();
+                try {
+                    Palette p = Palette.from((Bitmap) data.getExtras().get("data"))
+                            .maximumColorCount(16).generate();
+                    swatches = p.getSwatches();
+                    mAdapter.notifyDataSetChanged();
+                } catch (IllegalArgumentException iae) {
+                    iae.printStackTrace();
+                    finish();
+                }
             } else {
                 finish();
             }
