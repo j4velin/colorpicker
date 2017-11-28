@@ -1,16 +1,17 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
-
     dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6"
         if (rootProject.ext.has("gradle_classpath")) {
             classpath rootProject.ext.gradle_classpath
         } else {
             logger.warn('classpath not found in rootProject')
-            classpath 'com.android.tools.build:gradle:2.3.0'
+            classpath 'com.android.tools.build:gradle:3.0.1'
         }
     }
 }
@@ -19,7 +20,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: "com.jfrog.bintray"
 
-version = "1.2.5"
+version = "1.2.6"
 
 android {
 
@@ -28,14 +29,14 @@ android {
         buildToolsVersion rootProject.ext.buildToolsVersion
     } else {
         logger.warn('compileSdkVersion not found in rootProject')
-        compileSdkVersion 25
-        buildToolsVersion "25"
+        compileSdkVersion 27
+        buildToolsVersion "27.0.1"
     }
 
     defaultConfig {
         minSdkVersion 7
-        targetSdkVersion 25
-        versionCode 124
+        targetSdkVersion 27
+        versionCode 126
         versionName version
     }
 
@@ -53,8 +54,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:recyclerview-v7:26.0.1'
-    compile 'com.android.support:palette-v7:26.0.1'
+    compile 'com.android.support:recyclerview-v7:27.0.2'
+    compile 'com.android.support:palette-v7:27.0.2'
 }
 
 def libName = 'colorpicker'
