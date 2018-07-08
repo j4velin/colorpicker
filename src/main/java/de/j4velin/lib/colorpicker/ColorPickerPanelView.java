@@ -83,7 +83,7 @@ public class ColorPickerPanelView extends View {
         }
 
         if (mAlphaPattern != null) {
-            mAlphaPattern.draw(canvas);
+           // mAlphaPattern.draw(canvas);
         }
 
         mColorPaint.setColor(mColor);

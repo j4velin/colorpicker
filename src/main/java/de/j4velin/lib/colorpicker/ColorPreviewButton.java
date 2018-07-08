@@ -32,6 +32,8 @@ public class ColorPreviewButton extends View {
         } finally {
             a.recycle();
         }
+        setFocusable(true);
+        setBackgroundResource(R.drawable.focused);
     }
 
     public void setColor(final int c) {

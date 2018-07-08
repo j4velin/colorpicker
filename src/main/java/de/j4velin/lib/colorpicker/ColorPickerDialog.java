@@ -17,10 +17,12 @@
 package de.j4velin.lib.colorpicker;
 
 import android.app.Dialog;
+import android.app.UiModeManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Build;
@@ -44,7 +46,7 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
         View.OnClickListener {
 
     private final Context context;
-    private ColorPickerView mColorPicker;
+    private ColorView mColorPicker;
 
     private ColorPickerPanelView mOldColor;
     private ColorPickerPanelView mNewColor;
@@ -81,11 +83,11 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
 
         setContentView(layout);
 
-        mColorPicker = (ColorPickerView) layout.findViewById(R.id.color_picker_view);
-        mOldColor = (ColorPickerPanelView) layout.findViewById(R.id.old_color_panel);
-        mNewColor = (ColorPickerPanelView) layout.findViewById(R.id.new_color_panel);
+        mColorPicker = layout.findViewById(R.id.color_picker_view);
+        mOldColor = layout.findViewById(R.id.old_color_panel);
+        mNewColor = layout.findViewById(R.id.new_color_panel);
 
-        mHexVal = (EditText) layout.findViewById(R.id.hex_val);
+        mHexVal = layout.findViewById(R.id.hex_val);
         mHexVal.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         mHexDefaultTextColor = mHexVal.getTextColors();
 
@@ -151,6 +153,13 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
 		}
 		*/
 
+        if (((UiModeManager) getContext().getSystemService(Context.UI_MODE_SERVICE))
+                .getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
+            if (mListener != null) {
+                mListener.onColorChanged(mNewColor.getColor());
+            }
+            dismiss();
+        }
     }
 
     public void setHexValueEnabled(boolean enable) {

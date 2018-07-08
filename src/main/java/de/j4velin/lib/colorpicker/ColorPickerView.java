@@ -41,7 +41,7 @@ import android.view.View;
  *
  * @author Daniel Nilsson
  */
-public class ColorPickerView extends View {
+public class ColorPickerView extends View implements ColorView {
 
     private final static int PANEL_SAT_VAL = 0;
     private final static int PANEL_HUE = 1;
@@ -134,10 +134,6 @@ public class ColorPickerView extends View {
     private AlphaPatternDrawable mAlphaPattern;
 
     private Point mStartTouchPoint = null;
-
-    public interface OnColorChangedListener {
-        public void onColorChanged(int color);
-    }
 
     public ColorPickerView(Context context) {
         this(context, null);
@@ -778,12 +774,7 @@ public class ColorPickerView extends View {
     }
 
 
-    /**
-     * Set a OnColorChangedListener to get notified when the color
-     * selected by the user has changed.
-     *
-     * @param listener
-     */
+    @Override
     public void setOnColorChangedListener(OnColorChangedListener listener) {
         mListener = listener;
     }
@@ -805,11 +796,7 @@ public class ColorPickerView extends View {
         return mBorderColor;
     }
 
-    /**
-     * Get the current color this view is showing.
-     *
-     * @return the current color.
-     */
+    @Override
     public int getColor() {
         return Color.HSVToColor(mAlpha, new float[]{mHue, mSat, mVal});
     }
@@ -823,13 +810,7 @@ public class ColorPickerView extends View {
         setColor(color, false);
     }
 
-    /**
-     * Set the color this view should show.
-     *
-     * @param color    The color that should be selected.
-     * @param callback If you want to get a callback to
-     *                 your OnColorChangedListener.
-     */
+    @Override
     public void setColor(int color, boolean callback) {
 
         int alpha = Color.alpha(color);
@@ -850,35 +831,22 @@ public class ColorPickerView extends View {
         invalidate();
     }
 
-    /**
-     * Get the drawing offset of the color picker view.
-     * The drawing offset is the distance from the side of
-     * a panel to the side of the view minus the padding.
-     * Useful if you want to have your own panel below showing
-     * the currently selected color and want to align it perfectly.
-     *
-     * @return The offset in pixels.
-     */
+    @Override
     public float getDrawingOffset() {
         return mDrawingOffset;
     }
 
-    /**
-     * Set if the user is allowed to adjust the alpha panel. Default is false.
-     * If it is set to false no alpha will be set.
-     *
-     * @param visible
-     */
+    @Override
     public void setAlphaSliderVisible(boolean visible) {
 
         if (mShowAlphaPanel != visible) {
             mShowAlphaPanel = visible;
 
-			/*
+            /*
              * Reset all shader to force a recreation.
-			 * Otherwise they will not look right after
-			 * the size of the view has changed.
-			 */
+             * Otherwise they will not look right after
+             * the size of the view has changed.
+             */
             mValShader = null;
             mSatShader = null;
             mHueShader = null;
@@ -889,6 +857,7 @@ public class ColorPickerView extends View {
 
     }
 
+    @Override
     public boolean getAlphaSliderVisible() {
         return mShowAlphaPanel;
     }
