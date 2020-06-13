@@ -55,6 +55,8 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
     private boolean mHexValueEnabled = true;
     private ColorStateList mHexDefaultTextColor;
 
+    private View extractFromPhoto;
+
     public static OnColorChangedListener mListener;
 
     public interface OnColorChangedListener {
@@ -127,15 +129,16 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
         mOldColor.setColor(color);
         mColorPicker.setColor(color, true);
 
+        extractFromPhoto = layout.findViewById(R.id.fromphoto);
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            layout.findViewById(R.id.fromphoto).setOnClickListener(this);
+            extractFromPhoto.setOnClickListener(this);
         } else {
-            layout.findViewById(R.id.fromphoto).setVisibility(View.GONE);
+            extractFromPhoto.setVisibility(View.GONE);
         }
 
         if (Build.VERSION.SDK_INT >= 11) {
-            findViewById(R.id.copy).setOnClickListener(this);
-            findViewById(R.id.paste).setOnClickListener(this);
+            layout.findViewById(R.id.copy).setOnClickListener(this);
+            layout.findViewById(R.id.paste).setOnClickListener(this);
         }
 
     }
@@ -218,6 +221,13 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
 
     public int getColor() {
         return mColorPicker.getColor();
+    }
+
+    /**
+     * Disables the "extract color from photos" button
+     */
+    public void disableExtractFromPhotoOption() {
+        extractFromPhoto.setVisibility(View.GONE);
     }
 
     @Override
